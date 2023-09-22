@@ -1,0 +1,27 @@
+{
+  "name": "@ntlab/ids",
+  "version": "1.0.0",
+  "description": "A common Indonesian ids handling such as NIK, NIP, and others",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tohenk/node-ids.git"
+  },
+  "keywords": [
+    "identity",
+    "nik",
+    "nip",
+    "nrp"
+  ],
+  "author": "Toha <tohenk@yahoo.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tohenk/node-ids/issues"
+  },
+  "homepage": "https://github.com/tohenk/node-ids#readme",
+  "dependencies": {
+  }
+}
