@@ -24,6 +24,9 @@
 
 const Sequence = require('.');
 
+/**
+ * A date sequence.
+ */
 class SequenceDate extends Sequence {
 
     format = null
@@ -33,6 +36,13 @@ class SequenceDate extends Sequence {
         this.format = format;
     }
 
+    /**
+     * Extract date into object.
+     *
+     * @param {string} s Date value
+     * @param {string} format Date format, recognized formats are Y, y, m, and d.
+     * @returns {object}
+     */
     extractDate(s, format) {
         const res = {};
         let pos = 0;
@@ -48,6 +58,12 @@ class SequenceDate extends Sequence {
         return res;
     }
 
+    /**
+     * Add century to the year.
+     *
+     * @param {number} value Year value
+     * @returns {number}
+     */
     getYearFromMillenia(value) {
         const yr = (new Date()).getFullYear();
         let millenia = parseInt(yr.toString().substr(0, 2));
@@ -57,6 +73,13 @@ class SequenceDate extends Sequence {
         return (millenia * 100) + value;
     }
 
+    /**
+     * Decode a date value.
+     *
+     * @param {string} s Date value
+     * @param {*} format Date format, see {@link extractDate} for recoqnized formats
+     * @returns {Date}
+     */
     decodeDate(s, format) {
         const dt = this.extractDate(s, format);
         if (Object.keys(dt).length > 0) {
@@ -75,18 +98,37 @@ class SequenceDate extends Sequence {
         }
     }
 
+    /**
+     * Format date using defined format.
+     *
+     * @param {Date} date The date
+     * @returns {string}
+     */
     formateDate(date) {
         const res = '';
-        for (let i = 0; i < format.length; i++) {
-            res += this.getDateFormatted(format.charAt(i), this.getDateValue(date, format.charAt(i)), this.getDateSize(format.charAt(i)));
+        for (let i = 0; i < this.format.length; i++) {
+            res += this.getDateFormatted(this.format.charAt(i), this.getDateValue(date, this.format.charAt(i)), this.getDateSize(this.format.charAt(i)));
         }
         return res;
     }
 
+    /**
+     * Get date format size.
+     *
+     * @param {string} format Format, see {@link extractDate} for recoqnized formats
+     * @returns {number}
+     */
     getDateSize(format) {
         return format === 'Y' ? 4 : 2;
     }
 
+    /**
+     * Get date part value.
+     *
+     * @param {Date} date The date
+     * @param {string} format Format, see {@link extractDate} for recoqnized formats
+     * @returns {number}
+     */
     getDateValue(date, format) {
         switch (format) {
             case 'Y':
@@ -99,6 +141,14 @@ class SequenceDate extends Sequence {
         }
     }
 
+    /**
+     * Format a date.
+     *
+     * @param {string} format Format, see {@link extractDate} for recoqnized formats
+     * @param {number} value Value to format
+     * @param {number} size Formatted value length
+     * @returns {string}
+     */
     getDateFormatted(format, value, size) {
         let res = value.toString();
         if (format == 'y') {

@@ -28,6 +28,11 @@ const SequenceSerial = require('../sequence/serial');
 
 class Nrp extends Identity {
 
+    /**
+     * Constructor.
+     *
+     * @param {string} nrp The NRP value to decode upon creation
+     */
     constructor(nrp = null) {
         super();
         this
@@ -36,10 +41,20 @@ class Nrp extends Identity {
             .decode(nrp);
     }
 
+    /**
+     * Get date of birth from NRP.
+     *
+     * @returns {Date}
+     */
     getLahir() {
         return this.getValue(Nrp.LAHIR);
     }
 
+    /**
+     * Get sequence part from NRP.
+     *
+     * @returns {number}
+     */
     getUrut() {
         return this.getValue(Nrp.SEQUENCE);
     }

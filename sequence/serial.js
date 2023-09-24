@@ -24,6 +24,9 @@
 
 const Sequence = require('.');
 
+/**
+ * A seqeunce serial.
+ */
 class SequenceSerial extends Sequence {
 
     doDecode() {

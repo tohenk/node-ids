@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+/**
+ * An identity sequence.
+ */
 class Sequence {
 
     size = null
@@ -29,6 +32,12 @@ class Sequence {
     values = {}
     raw = null
 
+    /**
+     * Constructor.
+     *
+     * @param {number} size The sequence size
+     * @param {string|string[]} keys  The sequence keys
+     */
     constructor(size, keys) {
         this.size = size;
         if (Array.isArray(keys)) {
@@ -39,13 +48,27 @@ class Sequence {
         this.initialize();
     }
 
+    /**
+     * Do initialize the sequence.
+     */
     initialize() {
     }
 
+    /**
+     * Check if sequence key is exist?
+     *
+     * @param {string} name Sequence key
+     * @returns {boolean}
+     */
     hasKey(name) {
         return this.keys.indexOf(name) >= 0 ? true : false;
     }
 
+    /**
+     * Check if all values has been set?
+     *
+     * @returns {boolean}
+     */
     hasValues() {
         let res = true;
         this.keys.forEach(key => {
@@ -56,10 +79,21 @@ class Sequence {
         return res;
     }
 
+    /**
+     * Get raw value.
+     *
+     * @returns {string}
+     */
     getRaw() {
         return this.raw;
     }
 
+    /**
+     * Get value for sequence key. If key is ommited then first key assumed.
+     *
+     * @param {string|undefined|null} name Sequence key
+     * @returns {*}
+     */
     getValue(name) {
         if (name === undefined || name === null && this.keys.length) {
             name = this.keys[0];
@@ -69,6 +103,13 @@ class Sequence {
         }
     }
 
+    /**
+     * Set sequence value.
+     *
+     * @param {*} value Sequence value
+     * @param {string|undefined|null} name Sequence key
+     * @returns {Sequence}
+     */
     setValue(value, name) {
         if (name === undefined || name === null && this.keys.length) {
             name = this.keys[0];
@@ -79,6 +120,13 @@ class Sequence {
         return this;
     }
 
+    /**
+     * Decode a raw sequence value.
+     *
+     * @param {string} raw Raw value to decode
+     * @returns {Sequence}
+     * @throws {Error}
+     */
     decode(raw) {
         if (typeof raw !== 'string') {
             raw = raw + '';
@@ -91,19 +139,36 @@ class Sequence {
         return this;
     }
 
+    /**
+     * Do decode value internally.
+     */
     doDecode() {
         this.setValue(this.raw);
     }
 
+    /**
+     * Encode sequence values into raw value. The encoded value
+     * then can be retrieved using {@link getRaw}.
+     *
+     * @returns {Sequence}
+     */
     encode() {
         this.doEncode();
         return this;
     }
 
+    /**
+     * Do encode internally.
+     */
     doEncode() {
         this.raw = this.getValue();
     }
 
+    /**
+     * Reset sequence.
+     *
+     * @returns {Sequence}
+     */
     reset() {
         this.values = {};
         return this;

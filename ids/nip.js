@@ -28,6 +28,11 @@ const SequenceSerial = require('../sequence/serial');
 
 class Nip extends Identity {
 
+    /**
+     * Constructor.
+     *
+     * @param {string} nip The NIP value to decode upon creation
+     */
     constructor(nip = null) {
         super();
         this
@@ -38,18 +43,38 @@ class Nip extends Identity {
             .decode(nip);
     }
 
+    /**
+     * Get date of birth part from NIP.
+     *
+     * @returns {Date}
+     */
     getTglLahir() {
         return this.getValue(Nip.DOB);
     }
 
+    /**
+     * Get date of capeg part from NIP.
+     *
+     * @returns {Date}
+     */
     getTmtCapeg() {
         return this.getValue(Nip.CAPEG);
     }
 
+    /**
+     * Get gender part from NIP. It returns 1 for male and 2 for female.
+     *
+     * @returns {number}
+     */
     getGender() {
         return this.getValue(Nip.GENDER);
     }
 
+    /**
+     * Get sequence part from NIP.
+     *
+     * @returns {number}
+     */
     getUrut() {
         return this.getValue(Nip.SEQUENCE);
     }

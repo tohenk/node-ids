@@ -29,6 +29,11 @@ const SequenceSerial = require('../sequence/serial');
 
 class Nik extends Identity {
 
+    /**
+     * Constructor.
+     *
+     * @param {string} nik The NIK value to decode upon creation
+     */
     constructor(nik = null) {
         super();
         this
@@ -38,18 +43,38 @@ class Nik extends Identity {
             .decode(nik);
     }
 
+    /**
+     * Get `wilayah` part from NIK.
+     *
+     * @returns {string}
+     */
     getWilayah() {
         return this.getValue(Nik.WILAYAH);
     }
 
+    /**
+     * Get date of birth part from NIK.
+     *
+     * @returns {Date}
+     */
     getTglLahir() {
         return this.getValue(Nik.DOB);
     }
 
+    /**
+     * Get gender part from NIK.
+     *
+     * @returns {string}
+     */
     getGender() {
         return this.getValue(Nik.GENDER);
     }
 
+    /**
+     * Get sequence part from NIK.
+     *
+     * @returns {number}
+     */
     getUrut() {
         return this.getValue(Nik.SEQUENCE);
     }

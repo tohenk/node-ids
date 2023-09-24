@@ -22,16 +22,33 @@
  * SOFTWARE.
  */
 
+const Sequence = require('../sequence');
+
+/**
+ * A common identity base class.
+ */
 class Identity {
 
     sequences = []
     raw = null
 
+    /**
+     * Add an identity sequence.
+     *
+     * @param {Sequence} seq The sequence instance
+     * @returns {Identity}
+     */
     addSeq(seq) {
         this.sequences.push(seq);
         return this;
     }
 
+    /**
+     * Decode a value.
+     *
+     * @param {string} value The value do decode
+     * @returns {boolean} True if value successfully decoded
+     */
     decode(value) {
         if (value !== undefined && value !== null) {
             this.raw = value;
@@ -48,6 +65,11 @@ class Identity {
         }
     }
 
+    /**
+     * Encode identity sequence values.
+     *
+     * @returns {string}
+     */
     encode() {
         const raws = [];
         let count = 0;
@@ -64,6 +86,11 @@ class Identity {
         }
     }
 
+    /**
+     * Get identity length.
+     *
+     * @returns {number}
+     */
     getLength() {
         const res = 0;
         this.sequences.forEach(seq => {
@@ -72,6 +99,12 @@ class Identity {
         return res;
     }
 
+    /**
+     * Get identity sequence value.
+     *
+     * @param {string} name Sequence key
+     * @returns {*}
+     */
     getValue(name) {
         let res;
         this.sequences.forEach(seq => {
@@ -83,6 +116,13 @@ class Identity {
         return res;
     }
 
+    /**
+     * Set identity sequence value.
+     *
+     * @param {string} name Sequence key
+     * @param {*} value Sequence value
+     * @returns {Identity}
+     */
     setValue(name, value) {
         this.sequences.forEach(seq => {
             if (seq.hasKey(name)) {
@@ -93,6 +133,11 @@ class Identity {
         return this;
     }
 
+    /**
+     * Check if decoded sequence values are valid?
+     *
+     * @returns {boolean}
+     */
     isValid() {
         let res = true;
         this.sequences.forEach(seq => {
@@ -104,14 +149,31 @@ class Identity {
         return res;
     }
 
+    /**
+     * Check if decoded sequences length is valid?
+     *
+     * @returns {boolean}
+     */
     isLenValid() {
         return this.checkLength(this.raw);
     }
 
+    /**
+     * Check if identity length is matched.
+     *
+     * @param {string} value The identity value
+     * @returns {boolean}
+     */
     checkLength(value) {
         return this.getLength() === value.length;
     }
 
+    /**
+     * Format identity using separator.
+     *
+     * @param {string} separator Identity separator
+     * @returns {string}
+     */
     formatRaw(separator) {
         const raws = [];
         this.sequences.forEach(seq => {
@@ -120,6 +182,11 @@ class Identity {
         return raws.join(separator);
     }
 
+    /**
+     * Get string representation.
+     *
+     * @returns {string}
+     */
     toString() {
         return this.raw;
     }

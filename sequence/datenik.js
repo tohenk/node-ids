@@ -24,6 +24,9 @@
 
 const SequenceDate = require('./date');
 
+/**
+ * A date for NIK.
+ */
 class SequenceDateNik extends SequenceDate {
 
     GENDER = 'gender'
