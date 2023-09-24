@@ -32,3 +32,5 @@ console.log('Tanggal Lahir:', '2000-02-12 <->', nik.getTglLahir());
 console.log('Gender:', 'P <->', nik.getGender());
 console.log('Urut:', '5 <->', nik.getUrut());
 console.log('Format:', '351515 520200 0005 <->', nik.formatRaw(' '));
+
+const invalidNik = new Nik('3515159912990005');

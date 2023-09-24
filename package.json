@@ -1,6 +1,6 @@
 {
   "name": "@ntlab/ids",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A common Indonesian ids handling such as NIK, NIP, and others",
   "main": "index.js",
   "scripts": {

@@ -90,10 +90,27 @@ class SequenceDate extends Sequence {
                 dt.d = 1;
             }
             try {
+                if (dt.m < 1 || dt.m > 12) {
+                    throw new Error(`Invalid month ${dt.m}!`);
+                }
+                if (dt.d < 1) {
+                    throw new Error(`Invalid day ${dt.d} of month ${dt.m}!`);
+                }
+                if (dt.m === 2) {
+                    const isLeap = dt.y % 4 === 0 || dt.y % 100 === 0 || dt.y % 400 === 0 ? true : false;
+                    if ((dt.d > 29 && isLeap) || (dt.d > 28 && !isLeap)) {
+                        throw new Error(`Invalid day ${dt.d} of month ${dt.m}!`);
+                    }
+                } else {
+                    const d = (dt.m % 6) % 2 == 1 ? 31 : 30;
+                    if (dt.d > d) {
+                        throw new Error(`Invalid day ${dt.d} of month ${dt.m}!`);
+                    }
+                }
                 return new Date(Date.UTC(dt.y, dt.m - 1, dt.d));
             }
             catch (err) {
-                console.error(`Create date ${dt} returns ${err}!`);
+                console.error(`Create date ${JSON.stringify(dt)} returns ${err}!`);
             }
         }
     }
