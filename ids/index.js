@@ -92,11 +92,7 @@ class Identity {
      * @returns {number}
      */
     getLength() {
-        const res = 0;
-        this.sequences.forEach(seq => {
-            res += seq.size;
-        });
-        return res;
+        return this.sequences.reduce((value, current) => value + current.size, 0);
     }
 
     /**

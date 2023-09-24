@@ -25,6 +25,7 @@
 const { Nrp } = require('..');
 
 const nrp = new Nrp('95110029');
+console.log('Length:', nrp.getLength());
 console.log('Valid:', nrp.isValid());
 console.log('Tanggal Lahir:', '1995-11-01 <->', nrp.getLahir());
 console.log('Urut:', '29 <->', nrp.getUrut());

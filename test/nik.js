@@ -25,6 +25,7 @@
 const { Nik } = require('..');
 
 const nik = new Nik('3515155202000005');
+console.log('Length:', nik.getLength());
 console.log('Valid:', nik.isValid());
 console.log('Wilayah:', '351515 <->', nik.getWilayah());
 console.log('Tanggal Lahir:', '2000-02-12 <->', nik.getTglLahir());

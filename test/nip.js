@@ -25,6 +25,7 @@
 const { Nip } = require('..');
 
 const nip = new Nip('199909272020011004');
+console.log('Length:', nip.getLength());
 console.log('Valid:', nip.isValid());
 console.log('Tanggal Lahir:', '1999-09-27 <->', nip.getTglLahir());
 console.log('TMT Capeg:', '2020-01-01 <->', nip.getTmtCapeg());
