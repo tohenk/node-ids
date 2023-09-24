@@ -22,16 +22,42 @@
  * SOFTWARE.
  */
 
-module.exports = {
-    Identity: require('./ids'),
-    Nik: require('./ids/nik'),
-    Nip: require('./ids/nip'),
-    Nrp: require('./ids/nrp'),
-    Sequence: require('./sequence'),
-    SequenceDate: require('./sequence/date'),
-    SequenceDateNik: require('./sequence/datenik'),
-    SequenceSerial: require('./sequence/serial'),
-    Validator: require('./validator'),
-    registerNikValidator: require('./validator/nik'),
-    registerNipValidator: require('./validator/nip'),
+const Validator = require('.');
+const Nik = require('../ids/nik');
+
+class NikValidator extends Validator {
+
+    keyId = 'id'
+    keyDob = 'dob'
+    keyGender = 'gender'
+
+    initialize() {
+        this.id = 'NIK';
+        this.title = 'Validasi ID dengan Nomor Induk Kependudukan (NIK)';
+        this.label = 'Nomor Induk Kependudukan (NIK)';
+        this.identity = Nik;
+    }
+
+    doValidate(values) {
+        if (this.isKeySet(values, [this.keyId, this.keyDob, this.keyGender])) {
+            /** @type {Nik} id */
+            const id = this.createIdentity(values[this.keyId]);
+            return this.cmp({
+                [this.keyDob]: values[this.keyDob],
+                [this.keyGender]: values[this.keyGender],
+            }, {
+                [this.keyDob]: id.getTglLahir(),
+                [this.keyGender]: id.getGender(),
+            });
+        }
+        return false;
+    }
+}
+
+const validator = new NikValidator();
+
+module.exports = () => {
+    if (Validator.get(validator.id) === undefined) {
+        Validator.register(validator);
+    }
 }
